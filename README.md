@@ -2,7 +2,7 @@
 
 This repository, given an input mp4 video, adapts the RCNN method of object detection in images to quickly work in videos by using the temporal information available in natural videos.
 
-Usage: video_object_detector.py -i <input_file> -o <output_file> -p <proposal_method> -c <classification_method>
+Usage: video_object_detector.py -i \<input_file> -o \<output_file> -p \<proposal_method> -c \<classification_method>
 
 input file: a mp4 file containing the input video
 
