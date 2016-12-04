@@ -8,6 +8,6 @@ This repository, given an input mp4 video, adapts the RCNN method of object dete
 
 **output file**: a mp4 file containing the output video with bounding boxes drawn
 
-**proposal method**: the method by which the object detector estimates object location in subsequent frames. Can be "L" for local or "O" for optical flow.
+**proposal method**: the method by which the object detector estimates object location in subsequent frames. Can be "L" for local, "O" for optical flow, or "N" for no prediction.
 
 **classification method**: specifies the convolutional network used to check for objects within a given proposal.
