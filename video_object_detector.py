@@ -2,6 +2,7 @@ import sys, getopt
 import numpy
 import imageio
 import optical_flow as of
+import bounding_boxes as bb
 
 # We will split the image into grid_size * grid_size regions within which we will detect objects.
 grid_size = 10
@@ -22,7 +23,9 @@ def proposal(image, previous_location, method):
 		# Return optical flow estimate of location of image
 		return of.optical_flow_location_predictor(grayscale_image, previous_location)
 
-def get_bounding_box(image, previous_location, method):
+def get_bounding_box_and_location(image, previous_location, method):
+
+
 
 def main(argv):
    # Get command line arguments
@@ -45,13 +48,19 @@ def main(argv):
          classifier_method = arg
 
     # Get input and output videos
-    input_image = imageio.get_reader(input_file)
-    output_image = imageio.get_writer(output_file)
+    input_video = imageio.get_reader(input_file)
+    output_video = imageio.get_writer(output_file)
+
+    # initialize location and bounding box variables
+    location = [0 ,0]
+    bounding_box = [0, 0, 0, 0]
 
     # Get 
-    prediction = location_prediction() 
+    location, bounding_box = location_prediction() 
 
-    for i in range(get_length(input_image)):
+    for i in range(get_length(input_video)):
+      frame = input_video.get_data()
+      location, bounding_box = 
     	
 
 
