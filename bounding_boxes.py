@@ -1,3 +1,7 @@
+def predict_imscale(v_x, v_y, imscale)
+	imscale_predict = imscale + [v_x, v_y, 0, 0]
+	return imscale_predict
+
 def bounding_box_to_imscale(bounding_box):
 	x_c = (bounding_box[2] + bounding_box[0]) / 2
 	y_c = (bounding_box[3] + bounding_box[1]) / 2

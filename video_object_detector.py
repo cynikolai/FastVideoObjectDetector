@@ -4,12 +4,6 @@ import imageio
 import optical_flow as of
 import bounding_boxes as bb
 
-# We will split the image into grid_size * grid_size regions within which we will detect objects.
-grid_size = 10
-
-def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.299, 0.587, 0.114])
-
 def proposal(image, previous_location, method):
 	grayscale_image = rgb2gray(image)
 	if(method == "N"):
