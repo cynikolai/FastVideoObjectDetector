@@ -1,12 +1,20 @@
-def predict_imscale(v_x, v_y, imscale)
-	imscale_predict = imscale + [v_x, v_y, 0, 0]
+import numpy as np
+
+def imscale_priority(imscale_predicted, imscale):
+	delta_vector = abs(np.asarray(imscale_predicted) - np.asarray(imscale))
+	return 1 / np.dot(delta_vector, delta_vector)
+
+def predict_imscale(v_x, v_y, imscale):
+	imscale_predict = imscale
+	imscale_predict[0] += v_x
+	imscale_predict[1] += v_y
 	return imscale_predict
 
 def bounding_box_to_imscale(bounding_box):
-	x_c = (bounding_box[2] + bounding_box[0]) / 2
-	y_c = (bounding_box[3] + bounding_box[1]) / 2
-	x_r = (bounding_box[2] - bounding_box[0]) / 2
-	y_r = (bounding_box[3] - bounding_box[1]) / 2
+	x_c =  (bounding_box[0] + bounding_box[2]) / 2
+	y_c =  (bounding_box[1] + bounding_box[3]) / 2
+	x_r =  (bounding_box[2] - bounding_box[0]) / 2
+	y_r =  (bounding_box[3] - bounding_box[1]) / 2
 	return [x_c, y_c, x_r, y_r]
 
 def imscale_to_bounding_box(imscale):
