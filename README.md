@@ -1,6 +1,6 @@
 # Fast Video Object Detector
 
-![Alt text](cat_demo.png?raw=true "Optional Title")
+![Alt text](cat_demo.png=250x250?raw=true "Optional Title")
 
 This repository, given an input mp4 video, adapts the RCNN method of object detection in images to quickly work in videos by using the temporal information available in natural videos.
 
@@ -8,9 +8,9 @@ This repository, given an input mp4 video, adapts the RCNN method of object dete
 
 OpenCV: http://opencv.org/downloads.html
 
-Tensorflow:https://github.com/tensorflow/tensorflow
+Tensorflow: https://github.com/tensorflow/tensorflow
 
-EdgeBoxes:https://github.com/dculibrk/edge_boxes_with_python
+Selective Search: https://github.com/AlpacaDB/selectivesearch
 
 **Usage**: video_object_detector.py -i \<input_file> -o \<output_file> -p \<proposal_method> -c \<classification_method>
 
