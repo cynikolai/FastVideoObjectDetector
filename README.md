@@ -5,7 +5,9 @@ This repository, given an input mp4 video, adapts the RCNN method of object dete
 **Requirements**
 
 OpenCV: http://opencv.org/downloads.html
+
 Tensorflow:https://github.com/tensorflow/tensorflow
+
 EdgeBoxes:https://github.com/dculibrk/edge_boxes_with_python
 
 **Usage**: video_object_detector.py -i \<input_file> -o \<output_file> -p \<proposal_method> -c \<classification_method>
