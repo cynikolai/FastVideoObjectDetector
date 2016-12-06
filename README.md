@@ -1,6 +1,6 @@
 # Fast Video Object Detector
 
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
+![Alt text](cat_demo.png?raw=true "Optional Title")
 
 This repository, given an input mp4 video, adapts the RCNN method of object detection in images to quickly work in videos by using the temporal information available in natural videos.
 
