@@ -17,3 +17,7 @@ EdgeBoxes:
 **proposal method**: the method by which the object detector estimates object location in subsequent frames. Can be "L" for local, "O" for optical flow, or "N" for no prediction.
 
 **classification method**: specifies the convolutional network used to check for objects within a given proposal.
+
+You can download videos from youtube to use with the fast video object detector with the script youtube_object_detector.py (requires pytube).
+
+**Usage**: youtube_object_detector.py -l \<input_link> -r \<resolution>
