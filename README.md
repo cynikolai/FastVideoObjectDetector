@@ -1,8 +1,14 @@
 # Fast Video Object Detector
 
-![Alt text](cat_demo.png?raw=true "Optional Title")
+![Alt text](cat_demo.png?raw=true "A frame detected by the algorithm")
 
-This repository, given an input mp4 video, adapts the RCNN method of object detection in images to quickly work in videos by using the temporal information available in natural videos.
+Final project for EECS 442 Fall 2016 at the University of Michigan.
+
+This repository, given an input mp4 video, adapts the RCNN method of object detection in images to more quickly work in videos by using the temporal information available in natural videos. 
+
+This is a proof-of concept for using temporal information in object detection in videos, and is not a state-of-the-art algorithm.
+
+To run a test with the video data in the test folder, run python video_test.py.
 
 **Requirements**
 
