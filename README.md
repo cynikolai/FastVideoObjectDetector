@@ -33,3 +33,10 @@ You can download videos from youtube to use with the fast video object detector 
 **Usage**: youtube_object_detector.py -l \<input_link> -r \<resolution>
 
 This creates two copy videos in the current directory vid_original.mp4 and vid_bounded.mp4.
+
+# Citations
+
+[1] J. R. R. Uijlings et al., Selective Search for Object Recognition, IJCV, 2013 
+[2] R. Girshick, J. Donahue, T. Darrell, and J. Malik, “Rich feature hierarchies for accurate object detection and semantic segmentation,” in IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2014
+[3] Lucas, Bruce D., and Takeo Kanade. "An iterative image registration technique with an application to stereo vision." IJCAI. Vol. 81. No. 1. 1981.
+[4] Horn, Berthold KP, and Brian G. Schunck. "Determining optical flow." Artificial intelligence 17.1-3 (1981): 185-203.
