@@ -14,7 +14,6 @@ def generate_region_proposals(image_name):
         # excluding regions smaller than 2000 pixels
 		if r['size'] < 2000:
 			continue
-		print r['size']
         # distorted rects
 		x, y, w, h = r['rect']
 		if w / h > 1.2 or h / w > 1.2:

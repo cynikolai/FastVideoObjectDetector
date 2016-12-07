@@ -15,5 +15,7 @@ def optical_flow_location_predictor(image_1, image_2, x, y):
 
 	p0[0][0][0] = 1. * x
 	p0[0][0][1] = 1. * y
+
+	# OpenCV function for calculation of optical flow
 	p2, st, err = cv2.calcOpticalFlowPyrLK(image_1, image_2, p0,  **lk_params)
 	return int(p2[0][0][0]), int(p2[0][0][1])

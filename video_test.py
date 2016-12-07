@@ -4,6 +4,7 @@ import numpy
 import imageio
 from PIL import Image, ImageDraw
 import cv2
+import time
 
 # Helper scripts
 import optical_flow as of
@@ -17,8 +18,15 @@ TEST_LENGTH_2 = 250
 # Object to search for
 search_object = 'cat'
 
+# Number of highest priority objects to check
+num_priority = 3
+
+# Number of frames to check
+num_frames_to_detect = 10
+
 from Queue import PriorityQueue
 
+# Priority queue structure to order 
 class MyPriorityQueue(PriorityQueue):
     def __init__(self):
         PriorityQueue.__init__(self)
@@ -72,11 +80,7 @@ def object_locate(test, frame):
   bounding_box = [0, 0, 0, 0]
   classification = ''
   print "Number of proposals: " + str(len(region_proposals))
-  i = 0
   for region in region_proposals:
-      i += 1
-      if(i > 3):
-        continue
       print "Checking Another Region Proposal"
       bounding_box_test = rp.bounding_box_from_region(region)
       image_bit = image_slice(img, bounding_box_test)
@@ -98,6 +102,7 @@ def object_locate(test, frame):
           classification = human_string
   return bounding_box, max_score_abs, classification
 
+# RCNN with using temporal information
 def object_locate_prev_frame(test, frame, imscale_prev):
   image_name = get_frame(test,frame)
   img = cv2.imread(image_name)
@@ -107,13 +112,15 @@ def object_locate_prev_frame(test, frame, imscale_prev):
   bounding_box = [0, 0, 0, 0]
   classification = ''
   print "Number of proposals: " + str(len(region_proposals))
+  # Priority queue for region proposals
   queue = MyPriorityQueue()
   for region in region_proposals:
       bounding_box_test = rp.bounding_box_from_region(region)
       imscale_test = bb.bounding_box_to_imscale(bounding_box_test)
+      # Get proposal priority
       priority = bb.imscale_priority(imscale_prev, imscale_test)
       queue.put(region, -priority)
-  for i in range(3):
+  for i in range(num_priority):
       region = queue.get()
       bounding_box_test = rp.bounding_box_from_region(region)
       print "Checking Another Region Proposal"
@@ -139,7 +146,7 @@ def object_locate_prev_frame(test, frame, imscale_prev):
 
 def main(argv):
   print "Video Object Detector Test"
-
+  start_time = time.time()
   # Two tests: test 1 and test 2
   test = 1
 
@@ -149,7 +156,7 @@ def main(argv):
     test_length = TEST_LENGTH_2
   
   # Find object in first frame using RCNN
-  bounding_box, max_score, classification = object_locate(1, 1) 
+  bounding_box, max_score, classification = object_locate(test, 1) 
   draw_image(get_frame(test,1), bounding_box, classification, max_score)
 
   # Estimate new imscale with object flow
@@ -161,9 +168,19 @@ def main(argv):
   x_new, y_new = of.optical_flow_location_predictor(image_1, image_2, x,y)
   imscale_prev = bb.predict_imscale(x_new, y_new, imscale)
 
-  # Find object in second frame using fast video detection algorithm
-  bounding_box, max_score, classification = object_locate_prev_frame(1, 2, imscale_prev)
-  draw_image(get_frame(test,2), bounding_box, classification, max_score)
+  # Find object in frames 2-10 using fast video detection algorithm
+  for i in range(2, num_frames_to_detect):
+    bounding_box, max_score, classification = object_locate_prev_frame(test, i, imscale_prev)
+    imscale = bb.bounding_box_to_imscale(bounding_box)
+    x = imscale[0]
+    y = imscale[1]
+    image_1 = cv2.imread(get_frame(test,i), 0)
+    image_2 = cv2.imread(get_frame(test,i+1), 0)
+    x_new, y_new = of.optical_flow_location_predictor(image_1, image_2, x,y)
+    imscale_prev = bb.predict_imscale(x_new, y_new, imscale)
+    draw_image(get_frame(test,i), bounding_box, classification, max_score)
+
+    print("--- %s seconds per image---" % ((time.time() - start_time)/num_frames_to_detect))
 
 if __name__ == "__main__":
    main(sys.argv[1:])

@@ -1,3 +1,6 @@
+# Note: This is mostly the classify.py in tensorflow, modified to be callable in the use of this project.
+
+
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -180,8 +183,6 @@ def maybe_download_and_extract():
 def classify(image):
   maybe_download_and_extract()
   human_string, score = run_inference_on_image(image)
-  print(human_string)
-  print(score)
   return human_string, score
 
 
