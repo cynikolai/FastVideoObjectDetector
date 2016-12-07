@@ -4,6 +4,8 @@
 
 Final project for EECS 442 Fall 2016 at the University of Michigan.
 
+A presentation on the algorithm used here: https://paper.dropbox.com/doc/Improving-Region-Proposals-for-Object-Detection-in-Videos-odhPtQxJhhIKw05ALoIku
+
 This repository, given an input mp4 video, adapts the RCNN method of object detection in images to more quickly work in videos by using the temporal information available in natural videos. 
 
 This is a proof-of concept for using temporal information in object detection in videos, and is not a state-of-the-art algorithm.
